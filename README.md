@@ -27,7 +27,7 @@
 > $ npm run start
 ```
 
-在工程目录下启动webpack服务
+在react目录下启动webpack服务
 
 ```
 > $ npm run dev
