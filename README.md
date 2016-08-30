@@ -1,6 +1,6 @@
 # React-Demo
 
-### 基于reactjs && Node 通讯的简单演示
+### 基于Reactjs && Node 通讯的简单演示
 
 * Reactjs && ES6 && webpack构建移动端京东首页
 * 基于文件系统的Node.js服务端
