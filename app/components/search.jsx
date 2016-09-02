@@ -9,12 +9,11 @@ let Search = React.createClass({
 		}
 	},
 	componentDidMount: function() {
-		let _this = this;
 		window.onscroll = (event) => {
 			let realHeight = document.documentElement.scrollTop || document.body.scrollTop;
 			let optatic = 0.8 * (realHeight/142);
 			if(optatic <= 0.8 ) {
-				_this.setState({
+				this.setState({
 					bg: `rgba(234, 44, 44, ${optatic})`,
 				})
 			}
