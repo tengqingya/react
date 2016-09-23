@@ -31,7 +31,7 @@ let Search = React.createClass({
 					<div className="frc pr">
 						<span className="searchicon pa"></span>
 						<form>
-							<input placeholder="全场畅饮，部分低至99减50" type="text"/>
+							<input placeholder="!!全场畅饮，部分低至99减50" type="text"/>
 						</form>
 					</div>
 					<div className="sub pa">
