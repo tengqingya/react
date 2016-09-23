@@ -218,5 +218,15 @@ exports.like = (req, res) => {
   	res.send(callback + '(' + json + ')');
 };
 
+exports.canfoo = (req, res) => {
+	const sendData = {
+		status: 0,
+		msg: "",
+		data: 'canfoo is me',
+	}
+	
+	let json = JSON.stringify(sendData);
+  	res.send(json);
+};
 
 

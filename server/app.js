@@ -27,6 +27,7 @@ app.use("/data/otherapp", data.otherapp);
 app.use("/data/spike", data.spike);
 app.use("/data/more", data.more);
 app.use("/data/like", data.like);
+app.use("/data/canfoo", data.canfoo);
 
 
 // catch 404 and forward to error handler

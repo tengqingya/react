@@ -20,7 +20,6 @@ let Like = React.createClass({
 				}
 			}else {
 				alert(data.msg);
-				reject("get data error!")
 			}
 		})
 	},
