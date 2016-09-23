@@ -12,7 +12,7 @@ let dataBase = null;
  */
 let readFileData = () => {
 	let promise = new Promise((resolve, reject) => {
-		fs.readFile("./public/database/database.txt", "utf-8", (err, data) => {
+		fs.readFile("./public/database/database.json", "utf-8", (err, data) => {
 			if(err) {
 				console.log(err);
 				reject("read filedata error!");
