@@ -120,7 +120,6 @@ let Spike = React.createClass({
 											<p>¥{item.sprice}</p>
 											<p className="real-price">¥{item.price}</p>
 										</a>
-
 									</li>
 						})
 					}
