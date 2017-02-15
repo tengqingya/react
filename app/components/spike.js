@@ -1,6 +1,5 @@
-
-require('./spike.css');
-let jsonp = require('../util/jsonp.js');
+import './spike.css';
+import fetchJsonp from 'fetch-jsonp';
 import React from 'react'; 
 
 let Spike = React.createClass({
@@ -45,7 +44,9 @@ let Spike = React.createClass({
 	componentDidMount: function() {	
 		let getData = () => {
 			let promise = new Promise((resolve, reject) => {
-				jsonp(this.props.source, "", "callback", (data) => {
+				fetchJsonp(this.props.source).then((response) => {
+					return response.json();
+				}).then((data) => {
 					if(data.status) {
 						if(this.isMounted()) {
 							this.setState({
@@ -58,7 +59,7 @@ let Spike = React.createClass({
 						alert(data.msg);
 						reject("get data error!")
 					}
-				})
+				});
 			})
 			return promise;
 		}
@@ -120,7 +121,6 @@ let Spike = React.createClass({
 											<p>¥{item.sprice}</p>
 											<p className="real-price">¥{item.price}</p>
 										</a>
-
 									</li>
 						})
 					}
@@ -130,4 +130,7 @@ let Spike = React.createClass({
 	}
 })
 
+Spike.propTypes = {
+    source: React.PropTypes.string.isRequired,
+}
 module.exports = Spike;

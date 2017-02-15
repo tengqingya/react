@@ -7,7 +7,7 @@
 
 ![Mou icon](./jd.png)
 
-### 安装与运行程序
+## 安装与运行程序
 
 克隆项目
 
@@ -41,6 +41,28 @@
 
 执行完`npm run dev`命令后，打开浏览器 `http://localhost:8080/`运行项目，后台服务端口为 `3000`
 
+## 后台接口（jsonp请求）
+轮播图模块
+```
+http://localhost:3000/data/swiper
+```
 
+更多服务功能
+```
+http://localhost:3000/data/otherapp
+```
 
+秒杀折扣
+```
+http://localhost:3000/data/spike
+```
 
+更多种类选择
+```
+http://localhost:3000/data/more
+```
+
+猜你喜欢
+```
+http://localhost:3000/data/like
+```

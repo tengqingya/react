@@ -1,8 +1,6 @@
-
-require('./otherapp.css');
-let jsonp = require('../util/jsonp.js');
-
+import './otherapp.css';
 import React from 'react'; 
+import fetchJsonp from 'fetch-jsonp';
 
 let Otherapp = React.createClass({
 	getInitialState: function() {
@@ -12,7 +10,9 @@ let Otherapp = React.createClass({
  	},
 
  	componentDidMount: function() {
- 		jsonp(this.props.source, "", "callback", (data) => {
+ 		fetchJsonp(this.props.source).then((response) => {
+ 			return response.json();
+ 		}).then((data) => {
  			if(data.status) {
  				if(this.isMounted()) {
  					this.setState({
@@ -48,4 +48,7 @@ let Otherapp = React.createClass({
 	}
 })
 
+Otherapp.propTypes = {
+    source: React.PropTypes.string.isRequired,
+}
 module.exports = Otherapp;

@@ -1,4 +1,4 @@
-
+var path = require('path');
 let express = require('express');
 let router = express.Router();
 let fs = require('fs');
@@ -10,15 +10,17 @@ let dataBase = null;
  * 通过Promise读取存储的数据,确保有数据后再执行其他操作
  * @return {null} [无]
  */
+path.join(__dirname, './public/database/database.json')
 let readFileData = () => {
 	let promise = new Promise((resolve, reject) => {
-		fs.readFile("./public/database/database.txt", "utf-8", (err, data) => {
+		fs.readFile("./public/database/database.json", "utf-8", (err, data) => {
 			if(err) {
 				console.log(err);
 				reject("read filedata error!");
 			}else {
 				data = JSON.parse(data);
 				dataBase = data;
+				// console.log('dataBase', dataBase)
 				resolve();
 			}
 		})
@@ -122,6 +124,7 @@ exports.swiper = (req, res) => {
 		sendData.status = 1;
 		sendData.msg = "success";
 		sendData.data = imgNames;
+		console.log('imgNames',imgNames)
 	}else {
 		sendData.msg = "error";
 	}

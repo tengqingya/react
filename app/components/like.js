@@ -1,7 +1,6 @@
-
-require('./like.css');
-let jsonp = require('../util/jsonp.js');
+import './like.css';
 import React from 'react'; 
+import fetchJsonp from 'fetch-jsonp';
 
 let Like = React.createClass({
 	getInitialState: function() {
@@ -11,7 +10,9 @@ let Like = React.createClass({
 	},
 
 	componentDidMount: function() {
-		jsonp(this.props.source, "", "callback", (data) => {
+		fetchJsonp(this.props.source).then((response) => {
+			return response.json();
+		}).then((data) => {
 			if(data.status) {
 				if(this.isMounted()) {
 					this.setState({
@@ -55,4 +56,7 @@ let Like = React.createClass({
 	}
 })
 
+Like.propTypes = {
+    source: React.PropTypes.string.isRequired,
+}
 module.exports = Like;

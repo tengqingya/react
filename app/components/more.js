@@ -1,44 +1,43 @@
+import './more.css';
+import '../lib/swiper.min.css';
+import Swiper from '../lib/swiper.min.js';
+import fetchJsonp from 'fetch-jsonp';
+import React, { Component } from 'react'
 
-require('./more.css');
-require('../lib/swiper.min.css');
-let Swiper = require('../lib/swiper.min.js');
-let jsonp = require('../util/jsonp.js');
-import React from 'react'; 
+class More extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			more1: [],
+			more2: [],
+			more3: []
+		}
+	}
 
-var More = React.createClass({
-	getInitialState: function() {
-        return {
-        	more1: [],
-        	more2: [],
-        	more3: [],
-        };
- 	},
-
-	componentDidMount: function() {
-		jsonp(this.props.source, "", "callback", (data) => {
+	componentDidMount() {
+		fetchJsonp(this.props.source).then((response) => {
+			return response.json();
+		}).then((data) => {
 			if(data.status) {
-
-				if(this.isMounted()) {
-					this.setState({
-						more1: data.data.slice(0,3),
-						more2: data.data.slice(3,5),
-						more3: data.data.slice(5,7),
-					})
-				    new Swiper ('.more_bottom .swiper-container', {
-					    loop: true,
-					    pagination: '.swiper-pagination',
-					    paginationClickable: true,
-					    autoplay : 2000,
-						autoplayDisableOnInteraction : false,		    
-					}) 
-				}
+				this.setState({
+					more1: data.data.slice(0,3),
+					more2: data.data.slice(3,5),
+					more3: data.data.slice(5,7),
+				})
+			    new Swiper ('.more_bottom .swiper-container', {
+				    loop: true,
+				    pagination: '.swiper-pagination',
+				    paginationClickable: true,
+				    autoplay : 2000,
+					autoplayDisableOnInteraction : false,		    
+				})
 			}else {
 				alert(data.msg);
 			}
-		});
-	},
+		})
+	}
 
-	render: function() {
+	render() {
 
 		let countId = 0;
 		return (
@@ -84,6 +83,9 @@ var More = React.createClass({
 			</div>
 		);
 	}
-})
+}
 
+More.propTypes = {
+    source: React.PropTypes.string.isRequired,
+}
 module.exports = More;

@@ -1,11 +1,9 @@
-
-require("./header.css");
-require('../lib/swiper.min.css');
-let Swiper = require('../lib/swiper.min.js');
-let jsonp = require('../util/jsonp.js');
-
-import React from 'react';     
-
+import './header.css';
+import '../lib/swiper.min.css';
+import React from 'react';   
+import Swiper from '../lib/swiper.min.js'
+import fetchJsonp from 'fetch-jsonp';
+ 
 let Header = React.createClass({
 	getInitialState: function() {
         return {
@@ -13,7 +11,9 @@ let Header = React.createClass({
         };
  	},
 	componentDidMount: function() {
-		jsonp(this.props.source, "", "callback", (data) => {
+		fetchJsonp(this.props.source).then((response) => {
+			return response.json();
+		}).then((data) => {
 			if(data.status) {
 				//如果组件渲染到了 DOM 中，isMounted() 返回 true。
 				//可以使用该方法保证 setState() 和 forceUpdate() 
@@ -33,7 +33,7 @@ let Header = React.createClass({
 			}else {
 				alert(data.msg);
 			}
-		}); 
+		})
 	},
 
 	render: function () {
@@ -57,5 +57,8 @@ let Header = React.createClass({
 	  }
 })
 
+Header.propTypes = {
+    source: React.PropTypes.string.isRequired,
+}
 module.exports = Header;
 
