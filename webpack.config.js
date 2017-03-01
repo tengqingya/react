@@ -1,7 +1,9 @@
 var webpack = require('webpack');
 var path = require('path');
 var loaders = require('./webpack.loaders');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var HtmlwebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
 	entry: [
@@ -23,9 +25,9 @@ module.exports = {
 	},
 	devServer: {
 		contentBase: "./build", //静态资源的目录
-			noInfo: true, //  --no-info option
-			hot: true,   //自动刷新
-			inline: true
+		noInfo: true, //  --no-info option
+		hot: true,   //自动刷新
+		inline: true
 	},
 	plugins: [
 		new webpack.DefinePlugin({
@@ -33,8 +35,11 @@ module.exports = {
 	        'NODE_ENV': JSON.stringify('production')
 	      }
 	    }),
-		new CopyWebpackPlugin([
-			{from: './index.html'}
-		])
+	    new ExtractTextPlugin("index.css"),
+		new HtmlwebpackPlugin({
+	      filename: 'index.html',
+	      template: 'index.html',
+	      inject: true
+	    })
 	]
 };

@@ -1,3 +1,5 @@
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 module.exports = [
 	{
 		test: /\.js?$/,
@@ -5,9 +7,14 @@ module.exports = [
 		loaders: ['react-hot', 'babel'],
 	},
 
+	// {
+	// 	test: /\.css$/,
+	// 	// loader: 'style-loader!css-loader'
+	// 	loader: ExtractTextPlugin.extract("style?sourceMap!" + "css?sourceMap!")
+	// },
 	{
-		test: /\.css$/,
-		loader: 'style-loader!css-loader'
+	  test: /\.css$/,
+	  loader: ExtractTextPlugin.extract('style-loader', 'css-loader'),
 	},
 	{
 		test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,

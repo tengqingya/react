@@ -1,9 +1,10 @@
 var webpack = require('webpack');
 var path = require('path');
 var loaders = require('./webpack.loaders');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlwebpackPlugin = require('html-webpack-plugin');
+var AssetsPlugin = require('assets-webpack-plugin')
 
-//先清空build文件夹下的文件
 var fs = require('fs');
 var	buildPath='./build/';
 var folder_exists = fs.existsSync(buildPath);
@@ -18,14 +19,15 @@ if(folder_exists == true)
 };
 
 module.exports = {
-	//入口文件配置
-	entry: [
-		'./index.js' // Your appʼs entry point
-	],
+	entry: {
+		app: './index.js',
+		vendor: ['react']
+	},
 	//输出文件配置
 	output: {
 		path: path.join(__dirname, 'build'),
-		filename: 'bundle.js'
+		filename: '[name]-[hash].js',
+		publicPath: '/'
 	},
 	//更多配置项
 	resolve: {
@@ -43,9 +45,24 @@ module.exports = {
 	        'NODE_ENV': JSON.stringify('production')
 	      }
 	    }),
-	    //复制文件到构建目录
-	    new CopyWebpackPlugin([
-			{from: './index.html'}
-		])
+	    new ExtractTextPlugin("index-[hash].css"),
+		new webpack.optimize.UglifyJsPlugin({
+			output: {
+				comments: false,  // remove all comments
+			},
+			compress: {
+				warnings: false
+			}
+	    }),
+	    new HtmlwebpackPlugin({
+          	title: 'Hello World app',
+          	filename: 'index.html',
+          	template: './index.html',
+          	inject: true
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+        	name: 'vendor',
+        }),
+        new AssetsPlugin()
 	]
 };
