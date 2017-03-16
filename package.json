@@ -27,7 +27,6 @@
   },
   "homepage": "https://github.com/alicoding/react-webpack-babel#readme",
   "dependencies": {
-    "extract-text-webpack-plugin": "^2.0.0",
     "fetch-jsonp": "^1.0.6",
     "html-webpack-plugin": "^2.28.0",
     "json-loader": "^0.5.4",
