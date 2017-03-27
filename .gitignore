@@ -28,3 +28,7 @@ node_modules
 
 # Ignore build files
 node_modules
+
+build
+
+.idea
